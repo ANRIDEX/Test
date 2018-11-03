@@ -1,0 +1,28 @@
+*** Settings ***
+Library   Selenium2Library
+Suite Setup   Go to homepage
+Suite Teardown   Close All Browsers
+
+*** Variables ***
+${HOMEPAGE}  http://www.hotline.ua
+${BROWSER}   chrome
+
+
+*** TestCases ***
+Google iPhone 7 and find iPhone 7 
+      Google and check results  iPhone 7   iPhone 7 
+
+*** Keywords ***
+Google and check results
+       [Arguments]    ${searchkey}    ${result} 
+       Click Element  xpath=//*[@id="page-index"]/header/div[1]/div/div/div[1]/div/div[2]/div/div[2]/div/div[2]/span[1] 
+
+       Input Text    id=searchbox   ${searchkey}
+       Click Button  id=doSearch
+       Wait Until Page Contains     ${result}
+       Click Link  xpath=//*[@id="page-search"]/div[2]/div/div[1]/div[3]/div/ul/li[1]/div[3]/p/a
+
+
+Go to homepage
+       Open Browser     ${HOMEPAGE}   ${BROWSER}
+
